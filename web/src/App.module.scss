@@ -3,7 +3,7 @@
   height: 100vh;
   margin: 0 auto;
   
-  background: #121214;
+  background: var(--BLACK-SECONDARY);
 
   display: grid;
   grid-template-columns: 1fr 28.3125rem;

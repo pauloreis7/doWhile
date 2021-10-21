@@ -34,8 +34,8 @@
 }
 
 body {
-  background: #121214;
-  color: #E1E1E6;
+  background: var(--BLACK-SECONDARY);
+  color: var(--GRAY-TERTIARY);
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale;

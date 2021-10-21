@@ -14,7 +14,7 @@
 .signOutButton {
   background: transparent;
   border: 0;
-  color: #C4C4CC;
+  color: var(--GRAY-SECONDARY);
   transition: color 0.2;
   
   position: absolute;
@@ -35,7 +35,7 @@
 
   .userImage {
     padding: 0.1875rem;
-    background: linear-gradient(104.3deg, #FF008E 0.48%, #FFCD1E 100%);
+    background: linear-gradient(104.3deg, var(--PINK) 0.48%, var(--YELLOW) 100%);
     border-radius: 50%;
     line-height: 0;
 
@@ -58,7 +58,7 @@
     align-items: center;
     
     margin-top: 0.5rem;
-    color: #C4C4CC;
+    color: var(--GRAY-SECONDARY);
 
     svg {
       margin-right: 0.5rem;
@@ -72,12 +72,12 @@
   align-self: stretch;
   margin-top: 3rem;
 
-  background: #202024;
+  background: var(--BLACK-TERTIARY);
 
   label {
     padding: 1.125rem 1.5rem;
     font-size: 1.25rem;
-    background: #29292E;
+    background: var(--GRAY-QUATERNARY);
     font-weight: bold;
     text-align: left;
   }
@@ -88,7 +88,7 @@
     padding: 1.5rem;
     resize: none;
     height: 10rem;
-    color: #E1E1E6;
+    color: var(--GRAY-TERTIARY);
     font-size: 1rem;
     line-height: 1.5rem;
 
@@ -97,19 +97,19 @@
     }
 
     &::placeholder {
-      color: #8D8D99;
+      color: var(--GRAY-PRIMARY);
     }
   }
 
   button {
-    background: #FF008E;
+    background: var(--PINK);
     align-self: flex-end;
     cursor: pointer;
     border: 0;
     margin: 1.5rem;
     padding: 0 2rem;
     height: 2.5rem;
-    color: #FFF;
+    color: var(--WHITE);
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
