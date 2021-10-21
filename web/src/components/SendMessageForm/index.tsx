@@ -1,73 +1,77 @@
-import { useEffect, useState } from 'react';
-import io from 'socket.io-client';
+import { FormEvent, useState } from 'react';
+import { VscGithubInverted, VscSignOut } from 'react-icons/vsc';
 
+import { useAuth } from '../../hooks/useAuth';
 import { api } from '../../services/api';
-import logoImg from '../../assets/logo.svg'
 
 import styles from './styles.module.scss';
 
+export function SendMessageForm() {
+  const [message, setMessage] = useState('')
+  const [isSendingMessage, setIsSendingMessage] = useState(false)
 
-type Message = {
-  id: string;
-  text: string;
-  user: {
-    name: string;
-    avatar_url: string;
+  const { user, signOut } = useAuth()
+
+  async function handleSendMessage(event: FormEvent) {
+    event.preventDefault()
+
+    if (!message.trim()) {
+      return;
+    }
+
+    setIsSendingMessage(true)
+
+    try {
+      await api.post('messages', {
+        message,
+      })
+
+      setMessage('');
+    } finally {
+      setIsSendingMessage(false)
+    }
   }
-}
-
-let messagesQueue: Message[] = [];
-
-const socket = io('http://localhost:4000');
-
-socket.on('new_message', (newMessage) => {
-  messagesQueue.push(newMessage);
-});
-
-export function MessageList() {
-  const [messages, setMessages] = useState<Message[]>([])
-
-  useEffect(() => {
-    api.get<Message[]>('messages/last3').then(response => {
-      setMessages(response.data)
-    })
-  }, [])
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (messagesQueue.length > 0) {
-        setMessages(prevState => [
-          messagesQueue[0], 
-          prevState[0], 
-          prevState[1],
-        ].filter(Boolean));
-
-        messagesQueue.shift();
-      }
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   return (
-    <div className={styles.messageListWrapper}>
-      <img className={styles.logo} src={logoImg} alt="DoWhile 2021" />
+    <div className={styles.sendMessageFormWrapper}>
+      <button onClick={signOut} className={styles.signOutButton}>
+        <VscSignOut size={32} />
+      </button>
 
-      <ul className={styles.messageList}>
-        {messages.map(message => {
-          return (
-            <li className={styles.message} key={message.id}>
-              <p className={styles.messageContent}>{message.text}</p>
-              <div className={styles.messageUser}>
-                <div className={styles.userImage}>
-                  <img src={message.user.avatar_url} alt={message.user.name} />
-                </div>
-                <span>{message.user.name}</span>
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+      <header className={styles.signedUserInformation}>
+        <div className={styles.userImage}>
+          <img src={user?.avatar_url} alt={user?.name} />
+        </div>
+
+        <strong className={styles.userName}>{user?.name}</strong>
+
+        <span className={styles.userGithub}>
+          <VscGithubInverted size={16} />
+          {user?.login}
+        </span>
+      </header>
+
+      <form 
+        onSubmit={handleSendMessage} 
+        className={styles.sendMessageForm}
+      >
+        <label htmlFor="message">Mensagem</label>
+        
+        <textarea
+          name="message"
+          id="message"
+          placeholder="Qual sua expectativa para o evento?"
+          onChange={e => setMessage(e.target.value)}
+          value={message}
+        />
+
+        <button 
+          disabled={isSendingMessage} 
+          type="submit"
+        >
+          Enviar mensagem
+        </button>
+      </form>
     </div>
   )
 }

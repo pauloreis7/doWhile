@@ -10,10 +10,12 @@ export function App() {
   const { user } = useAuth()
 
   return (
-    <main className={styles.contentWrapper}>
-      <MessageList />
-
-      { !!user ? <SendMessageForm /> : <LoginBox /> }
-    </main>
+    <div className="App">
+      <main className={`${styles.contentWrapper} ${!!user ? styles.contentSigned : ''}`}>
+        <MessageList />
+        
+        { !!user ? <SendMessageForm /> : <LoginBox /> }
+      </main>
+    </div>
   )
 }
