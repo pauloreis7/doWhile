@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src=".github/Logo.svg" />
+    <img src=".github/Logo.png" />
 </h1>
 
 <h2 align="center">
@@ -13,7 +13,7 @@
 </h2>
 
 <h1 align="center">
-    <img src=".github/Cover.svg" />
+    <img src=".github/Cover.png" />
 </h1>
 
 <h4 align="center">🏁 Application already finished 🏁</h4>
@@ -41,8 +41,8 @@
 ## 🎨 Application Layout
 ---
 <p align="center">
-<img src=".github/desktop/Home.svg"/>
-<img src=".github/desktop/HomeLogged.svg"/>
+<img src=".github/desktop/Home.png"/>
+<img src=".github/desktop/HomeLogged.png"/>
 
 ### 📱 Mobile
 <img src=".github/mobile/splash.png"/>
